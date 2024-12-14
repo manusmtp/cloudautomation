@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Lambda Function for Basic Hello World'
+
+Resources:
+  MyLambdaFunction:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      FunctionName: HelloWorldLambda
+      Handler: index.lambda_handler
+      Role: arn:aws:iam::5854696:role/service-role/manulambda
+      Code:
+        ZipFile: |
+          def lambda_handler(event, context):
+              return {
+                  'statusCode': 200,
+                  'body': 'Hello from Lambda!',
+                  'headers': {
+                      'Content-Type': 'application/json'
+                  }
+              }
+      Runtime: python3.8
+      Timeout: 15
+      MemorySize: 128
+      TracingConfig:
+        Mode: Active
